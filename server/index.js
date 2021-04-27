@@ -26,12 +26,12 @@ app.get("/api/translate/:text", async (req, res) => {
 			Text: req.params.text,
 		};
 		resp = await translate.translateText(params, (err, data) => {
-			return data;
+			return data["TranslatedText"];
 		});
 		console.log(resp);
 	};
 	await translate();
-	res.send({ resp });
+	res.send(resp);
 });
 
 // !-----tests------------------
