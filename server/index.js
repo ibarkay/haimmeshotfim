@@ -19,7 +19,7 @@ app.get("/api/translate/:text", async (req, res) => {
 	AWS.config.update({ region: "eu-central-1" });
 
 	const translate = new AWS.Translate();
-	const stingy = "";
+	let stingy = "";
 
 	const params = {
 		SourceLanguageCode: "auto",
