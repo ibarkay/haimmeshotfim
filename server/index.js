@@ -17,20 +17,21 @@ app.use(express.json());
 
 app.get("/api/translate/:text", async (req, res) => {
 	let resp = "";
-	const translate = async () => {
-		await AWS.config.update({ region: "eu-central-1" });
-		const translate = new AWS.Translate();
-		const params = {
-			SourceLanguageCode: "auto",
-			TargetLanguageCode: "es",
-			Text: req.params.text,
-		};
-		resp = await translate.translateText(params, (err, data) => {
-			return data["TranslatedText"];
-		});
-		console.log(resp);
+
+	AWS.config.update({ region: "eu-central-1" });
+
+	const translate = new AWS.Translate();
+
+	const params = {
+		SourceLanguageCode: "auto",
+		TargetLanguageCode: "es",
+		Text: "Hello! My name is Fernando.",
 	};
-	await translate();
+
+	translate.translateText(params, function (err, data) {
+		if (err) console.log(err, err.stack);
+		else resp = data["TranslatedText"];
+	});
 	res.send(resp);
 });
 
