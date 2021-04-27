@@ -25,13 +25,15 @@ app.get("/api/translate/:text", async (req, res) => {
 		TargetLanguageCode: "es",
 		Text: req.params.text,
 	};
-	const data = await translate.translateText(params);
-	console.log(data);
+
 	translate.translateText(params, async function (err, data) {
 		if (err) console.log(err, err.stack);
-		else console.log(data["TranslatedText"]);
+		else {
+			console.log(data["TranslatedText"]);
+			var mm = await data["TranslatedText"];
+		}
 	});
-	res.send(resp);
+	res.send(mm);
 });
 
 // !-----tests------------------
