@@ -28,19 +28,19 @@ const poemSchema = mongoose.Schema({
 	translate: {
 		type: String,
 	},
-	comments: [
-		{
-			title: {
-				type: String,
-				required: true,
-				unique: true,
-			},
-			text: {
-				type: String,
-				required: true,
-			},
-		},
-	],
+	// comments: [
+	// 	{
+	// 		title: {
+	// 			type: String,
+	// 			required: true,
+	// 			unique: true,
+	// 		},
+	// 		text: {
+	// 			type: String,
+	// 			required: true,
+	// 		},
+	// 	},
+	// ],
 });
 
 const Poem = mongoose.model("Poem", poemSchema);
