@@ -25,7 +25,7 @@ app.get("/api/translate/:text", async (req, res) => {
 	const params = {
 		SourceLanguageCode: "auto",
 		TargetLanguageCode: "es",
-		Text: "Hello! My name is Fernando.",
+		Text: req.body.text,
 	};
 
 	translate.translateText(params, function (err, data) {
