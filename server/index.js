@@ -15,24 +15,23 @@ app.use(cors());
 app.use(express.json());
 // !-----tests------------------
 
-app.get("/api/translate", async (req, res) => {
+app.get("/api/translate/:text", async (req, res) => {
 	const translate = async () => {
 		await AWS.config.update({ region: "eu-central-1" });
-		await AWS.config.update({ region: "us-east-1" });
 		const translate = await new AWS.Translate();
 		const params = {
 			SourceLanguageCode: "auto",
 			TargetLanguageCode: "es",
-			Text: "Hello! My name is Fernando.",
+			Text: req.params.text,
 		};
 
 		await translate.translateText(params, function (err, data) {
 			if (err) console.log(err, err.stack);
-			else console.log(data["TranslatedText"]);
+			else return data["TranslatedText"];
 		});
 	};
-	translate();
-	res.send("mmmm");
+	const resp = await translate();
+	res.send(resp);
 });
 
 // !-----tests------------------
