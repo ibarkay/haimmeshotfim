@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 require("./modules/mongoose");
 const app = express();
 const AWS = require("aws-sdk");
-AWS.config.update({ region: "eu-central-1" });
+
 const port = 5000;
 // ------module import----------------
 
@@ -17,6 +17,7 @@ app.use(express.json());
 
 app.get("/api/translate", async (req, res) => {
 	const translate = async () => {
+		await AWS.config.update({ region: "eu-central-1" });
 		await AWS.config.update({ region: "us-east-1" });
 		const translate = await new AWS.Translate();
 		const params = {
@@ -27,10 +28,11 @@ app.get("/api/translate", async (req, res) => {
 
 		await translate.translateText(params, function (err, data) {
 			if (err) console.log(err, err.stack);
-			else return data["TranslatedText"];
+			else console.log(data["TranslatedText"]);
 		});
 	};
-	res.send(translate());
+	translate();
+	res.send("mmmm");
 });
 
 // !-----tests------------------
