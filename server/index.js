@@ -72,7 +72,7 @@ app.delete("/api/poems/:name", async (req, res) => {
 });
 // ?add comment
 
-app.put("/api/poems:name", async (req, res) => {
+app.put("/api/poems/:name", async (req, res) => {
 	try {
 		const poem = await Poem.findOne({ poemName: req.params.name });
 		poem.comments.push({ title: req.body.title, text: req.body.text });
@@ -82,10 +82,10 @@ app.put("/api/poems:name", async (req, res) => {
 				res.send("comment was saved.");
 			})
 			.catch((e) => {
-				res.status(500).send("unable to add comment");
+				res.status(500).send("unable to save comment");
 			});
 	} catch (e) {
-		res.status(500).send("unable to add comment");
+		res.status(500).send(e.message);
 	}
 });
 
