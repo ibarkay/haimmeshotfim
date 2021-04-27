@@ -6,6 +6,9 @@ const poemSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	authorInfo: {
+		type: String,
+	},
 	poemName: {
 		type: String,
 		unique: true,
