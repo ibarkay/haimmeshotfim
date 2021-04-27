@@ -16,7 +16,7 @@ app.use(express.json());
 // !-----tests------------------
 
 app.get("/api/translate/:text", async (req, res) => {
-  let d = ;
+	let d = "";
 	const translate = async () => {
 		await AWS.config.update({ region: "eu-central-1" });
 		const translate = new AWS.Translate();
@@ -30,12 +30,12 @@ app.get("/api/translate/:text", async (req, res) => {
 			if (err) console.log(err, err.stack);
 			else {
 				console.log(data["TranslatedText"]);
-				d = data["TranslatedText"]
+				d = data["TranslatedText"];
 			}
 		});
 	};
 	await translate();
-  res.send(d);
+	res.send(d);
 });
 
 // !-----tests------------------
