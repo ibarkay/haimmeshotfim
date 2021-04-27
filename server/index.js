@@ -3,6 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("./modules/mongoose");
 const app = express();
+const AWS = require("aws-sdk");
+AWS.config.update({ region: "eu-central-1" });
 const port = 5000;
 // ------module import----------------
 
@@ -11,6 +13,27 @@ const Comment = require("./modules/Comment");
 // -------use's---------------
 app.use(cors());
 app.use(express.json());
+// !-----tests------------------
+
+app.get("/api/translate", async (req, res) => {
+	const translate = async () => {
+		await AWS.config.update({ region: "us-east-1" });
+		const translate = await new AWS.Translate();
+		const params = {
+			SourceLanguageCode: "auto",
+			TargetLanguageCode: "es",
+			Text: "Hello! My name is Fernando.",
+		};
+
+		await translate.translateText(params, function (err, data) {
+			if (err) console.log(err, err.stack);
+			else return data["TranslatedText"];
+		});
+	};
+	res.send(translate());
+});
+
+// !-----tests------------------
 // -------end-points---------------
 app.get("/api/", (req, res) => {
 	try {
