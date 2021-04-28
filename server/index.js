@@ -30,8 +30,7 @@ app.get("/api/translate/:text", async (req, res) => {
 	translate.translateText(params, async function (err, data) {
 		if (err) console.log(err, err.stack);
 		else {
-			console.log(data["TranslatedText"]);
-			stingy += data["TranslatedText"].toString();
+			console.dir(data["TranslatedText"]);
 		}
 	});
 	res.send(stingy);
