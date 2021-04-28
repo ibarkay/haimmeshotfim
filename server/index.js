@@ -48,7 +48,8 @@ app.get("/api/", (req, res) => {
 // ?find by category
 app.get("/api/category/:c", async (req, res) => {
 	try {
-		const list = Poem.find({ category: req.params.c });
+		const list = await Poem.find({ category: req.params.c });
+		res.send(list);
 	} catch (e) {
 		res.status(500).send(e.message);
 	}
