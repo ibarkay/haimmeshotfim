@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 // !-----tests------------------
 
-app.get("/api/translate/:text", async (req, res) => {
+app.post("/api/translate/", async (req, res) => {
 	AWS.config.update({ region: "eu-central-1" });
 
 	const translate = new AWS.Translate();
@@ -24,7 +24,7 @@ app.get("/api/translate/:text", async (req, res) => {
 	const params = {
 		SourceLanguageCode: "auto",
 		TargetLanguageCode: "es",
-		Text: "the swimmer got home.",
+		Text: req.body.text,
 	};
 
 	translate.translateText(params, function (err, data) {
@@ -32,7 +32,6 @@ app.get("/api/translate/:text", async (req, res) => {
 		else {
 			// console.log(data["TranslatedText"]);
 			stingy += data["TranslatedText"];
-			console.log(stingy);
 			res.send(stingy); //thanx to jordan!
 		}
 	});
