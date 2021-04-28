@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const poemSchema = mongoose.Schema({
 	authorName: {
 		type: String,
-		required: true,
 	},
 	authorInfo: {
 		type: String,
@@ -11,15 +10,12 @@ const poemSchema = mongoose.Schema({
 	category: {
 		type: String,
 	},
-
 	poemName: {
 		type: String,
 		unique: true,
-		required: true,
 	},
 	poem: {
 		type: String,
-		required: true,
 	},
 	translate: {
 		type: String,

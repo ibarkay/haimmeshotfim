@@ -80,6 +80,8 @@ app.post("/api/poems/new", async (req, res) => {
 			poemName: req.body.poemName,
 			poem: req.body.poem,
 			translate: req.body.translate,
+			category: req.body.category,
+			authorInfo: req.body.authorInfo,
 		});
 		arr
 			.save()
