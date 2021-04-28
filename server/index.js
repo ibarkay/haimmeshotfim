@@ -65,7 +65,7 @@ app.get("/api/poems/:name", async (req, res) => {
 	}
 });
 // ?create poem
-app.post(" ", async (req, res) => {
+app.post("/api/poems/new", async (req, res) => {
 	try {
 		const arr = new Poem({
 			authorName: req.body.authorName,
