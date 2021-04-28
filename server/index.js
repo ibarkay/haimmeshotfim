@@ -23,7 +23,7 @@ app.post("/api/translate/", async (req, res) => {
 
 	const params = {
 		SourceLanguageCode: "auto",
-		TargetLanguageCode: "es",
+		TargetLanguageCode: "he",
 		Text: req.body.text,
 	};
 
