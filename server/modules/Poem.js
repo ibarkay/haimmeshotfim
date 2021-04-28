@@ -8,13 +8,10 @@ const poemSchema = mongoose.Schema({
 	authorInfo: {
 		type: String,
 	},
-	category: [
-		{
-			cat: {
-				type: String,
-			},
-		},
-	],
+	category: {
+		type: String,
+	},
+
 	poemName: {
 		type: String,
 		unique: true,
