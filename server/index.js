@@ -30,7 +30,6 @@ app.post("/api/translate/", async (req, res) => {
 	translate.translateText(params, function (err, data) {
 		if (err) console.log(err, err.stack);
 		else {
-			// console.log(data["TranslatedText"]);
 			stingy += data["TranslatedText"];
 			res.send(stingy); //thanx to jordan!
 		}
@@ -42,6 +41,14 @@ app.post("/api/translate/", async (req, res) => {
 app.get("/api/", (req, res) => {
 	try {
 		res.send("nice. you are connected now.");
+	} catch (e) {
+		res.status(500).send(e.message);
+	}
+});
+// ?find by category
+app.get("/api/category/:c", async (req, res) => {
+	try {
+		const list = Poem.find({ category: req.params.c });
 	} catch (e) {
 		res.status(500).send(e.message);
 	}
