@@ -24,7 +24,7 @@ app.get("/api/translate/:text", async (req, res) => {
 	const params = {
 		SourceLanguageCode: "auto",
 		TargetLanguageCode: "es",
-		Text: req.params.text,
+		Text: "the swimmer got home.",
 	};
 
 	translate.translateText(params, function (err, data) {
@@ -33,7 +33,7 @@ app.get("/api/translate/:text", async (req, res) => {
 			// console.log(data["TranslatedText"]);
 			stingy += data["TranslatedText"];
 			console.log(stingy);
-			res.send(stingy);
+			res.send(stingy); //thanx to jordan!
 		}
 	});
 });
